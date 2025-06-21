@@ -21,6 +21,7 @@ interface AppContextType {
     amount: number,
   ) => Promise<void>;
   updateUserBalance: (amount: number) => Promise<void>;
+  resetToSampleData: () => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -48,25 +49,33 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   });
   const [loading, setLoading] = useState(true);
 
-  const loadData = async () => {
+  const loadData = async (forceReload: boolean = false) => {
     try {
       setLoading(true);
 
-      // Try to load saved data from AsyncStorage
-      const savedData = await AsyncStorage.getItem('appData');
-
-      if (savedData) {
-        const parsedData: GameData = JSON.parse(savedData);
-        setGames(parsedData.games);
-        setUser(parsedData.user);
-      } else {
-        // Use sample data if no saved data exists
+      if (forceReload) {
+        // Force reload from sample data
         const data = sampleData as GameData;
         setGames(data.games);
         setUser(data.user);
-
-        // Save sample data to AsyncStorage
         await AsyncStorage.setItem('appData', JSON.stringify(data));
+      } else {
+        // Try to load saved data from AsyncStorage
+        const savedData = await AsyncStorage.getItem('appData');
+
+        if (savedData) {
+          const parsedData: GameData = JSON.parse(savedData);
+          setGames(parsedData.games);
+          setUser(parsedData.user);
+        } else {
+          // Use sample data if no saved data exists
+          const data = sampleData as GameData;
+          setGames(data.games);
+          setUser(data.user);
+
+          // Save sample data to AsyncStorage
+          await AsyncStorage.setItem('appData', JSON.stringify(data));
+        }
       }
     } catch (error) {
       console.error('Error loading data:', error);
@@ -186,6 +195,15 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     await saveData(games, updatedUser);
   };
 
+  const resetToSampleData = async () => {
+    try {
+      await AsyncStorage.removeItem('appData');
+      await loadData(true);
+    } catch (error) {
+      console.error('Error resetting to sample data:', error);
+    }
+  };
+
   useEffect(() => {
     loadData();
   }, []);
@@ -197,6 +215,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     refreshGames,
     makePrediction,
     updateUserBalance,
+    resetToSampleData,
   };
 
   return (

@@ -57,6 +57,179 @@
         "score": 103
       },
       "winner": "MIA"
+    },
+    {
+      "id": "gm1004",
+      "status": "scheduled",
+      "startTime": "2025-05-25T20:30:00Z",
+      "homeTeam": {
+        "name": "Phoenix Suns",
+        "abbreviation": "PHX",
+        "record": "44-26"
+      },
+      "awayTeam": {
+        "name": "Denver Nuggets",
+        "abbreviation": "DEN",
+        "record": "48-22"
+      },
+      "odds": {
+        "spread": "-4.5",
+        "favorite": "DEN"
+      }
+    },
+    {
+      "id": "gm1005",
+      "status": "scheduled",
+      "startTime": "2025-05-25T21:00:00Z",
+      "homeTeam": {
+        "name": "Milwaukee Bucks",
+        "abbreviation": "MIL",
+        "record": "46-24"
+      },
+      "awayTeam": {
+        "name": "Philadelphia 76ers",
+        "abbreviation": "PHI",
+        "record": "41-29"
+      },
+      "odds": {
+        "spread": "+2.5",
+        "favorite": "MIL"
+      }
+    },
+    {
+      "id": "gm1006",
+      "status": "inProgress",
+      "period": "2nd",
+      "clock": "6:42",
+      "homeTeam": {
+        "name": "Sacramento Kings",
+        "abbreviation": "SAC",
+        "record": "39-31",
+        "score": 54
+      },
+      "awayTeam": {
+        "name": "Portland Trail Blazers",
+        "abbreviation": "POR",
+        "record": "28-42",
+        "score": 48
+      },
+      "odds": {
+        "spread": "+7.5",
+        "favorite": "SAC"
+      }
+    },
+    {
+      "id": "gm1007",
+      "status": "scheduled",
+      "startTime": "2025-05-26T19:00:00Z",
+      "homeTeam": {
+        "name": "Atlanta Hawks",
+        "abbreviation": "ATL",
+        "record": "33-37"
+      },
+      "awayTeam": {
+        "name": "Brooklyn Nets",
+        "abbreviation": "BKN",
+        "record": "30-40"
+      },
+      "odds": {
+        "spread": "+1.5",
+        "favorite": "ATL"
+      }
+    },
+    {
+      "id": "gm1008",
+      "status": "final",
+      "homeTeam": {
+        "name": "Chicago Bulls",
+        "abbreviation": "CHI",
+        "record": "35-35",
+        "score": 98
+      },
+      "awayTeam": {
+        "name": "Toronto Raptors",
+        "abbreviation": "TOR",
+        "record": "32-38",
+        "score": 102
+      },
+      "winner": "TOR"
+    },
+    {
+      "id": "gm1009",
+      "status": "scheduled",
+      "startTime": "2025-05-26T20:00:00Z",
+      "homeTeam": {
+        "name": "Utah Jazz",
+        "abbreviation": "UTA",
+        "record": "29-41"
+      },
+      "awayTeam": {
+        "name": "Minnesota Timberwolves",
+        "abbreviation": "MIN",
+        "record": "43-27"
+      },
+      "odds": {
+        "spread": "-6.5",
+        "favorite": "MIN"
+      }
+    },
+    {
+      "id": "gm1010",
+      "status": "inProgress",
+      "period": "4th",
+      "clock": "2:15",
+      "homeTeam": {
+        "name": "Orlando Magic",
+        "abbreviation": "ORL",
+        "record": "37-33",
+        "score": 105
+      },
+      "awayTeam": {
+        "name": "Cleveland Cavaliers",
+        "abbreviation": "CLE",
+        "record": "44-26",
+        "score": 108
+      },
+      "odds": {
+        "spread": "-3.5",
+        "favorite": "CLE"
+      }
+    },
+    {
+      "id": "gm1011",
+      "status": "scheduled",
+      "startTime": "2025-05-26T22:30:00Z",
+      "homeTeam": {
+        "name": "Los Angeles Clippers",
+        "abbreviation": "LAC",
+        "record": "42-28"
+      },
+      "awayTeam": {
+        "name": "Memphis Grizzlies",
+        "abbreviation": "MEM",
+        "record": "25-45"
+      },
+      "odds": {
+        "spread": "+8.5",
+        "favorite": "LAC"
+      }
+    },
+    {
+      "id": "gm1012",
+      "status": "final",
+      "homeTeam": {
+        "name": "San Antonio Spurs",
+        "abbreviation": "SAS",
+        "record": "20-50",
+        "score": 89
+      },
+      "awayTeam": {
+        "name": "Houston Rockets",
+        "abbreviation": "HOU",
+        "record": "38-32",
+        "score": 114
+      },
+      "winner": "HOU"
     }
   ],
   "user": {

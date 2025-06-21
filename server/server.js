@@ -10,12 +10,24 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
-// Load sample data
+// Sample data path
 const sampleDataPath = path.join(
   __dirname,
   '../src/data/sample-games-simplified.json',
 );
-let gameData = JSON.parse(fs.readFileSync(sampleDataPath, 'utf8'));
+
+// Function to load fresh data
+const loadGameData = () => {
+  try {
+    return JSON.parse(fs.readFileSync(sampleDataPath, 'utf8'));
+  } catch (error) {
+    console.error('Error loading game data:', error);
+    return { games: [], user: {} };
+  }
+};
+
+// Load initial data
+let gameData = loadGameData();
 
 // Helper function to simulate game updates
 const updateGameScores = () => {
@@ -46,6 +58,8 @@ setInterval(updateGameScores, 30000);
 app.get('/api/games', (req, res) => {
   try {
     console.log('GET /api/games - Fetching all games');
+    // Reload data from file to get latest changes
+    gameData = loadGameData();
     res.json({
       success: true,
       data: gameData.games,
@@ -172,6 +186,9 @@ app.get('/api/user/:id', (req, res) => {
   try {
     const { id } = req.params;
     console.log(`GET /api/user/${id} - Fetching user profile`);
+
+    // Reload data from file to get latest changes
+    gameData = loadGameData();
 
     if (id !== gameData.user.id) {
       return res.status(404).json({

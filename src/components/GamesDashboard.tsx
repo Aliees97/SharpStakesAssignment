@@ -10,13 +10,14 @@ import {
 } from 'react-native';
 import { useApp } from '../context/AppContext';
 import { Game, GameStatus } from '../types';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface GamesDashboardProps {
   onGamePress: (game: Game) => void;
 }
 
 const GamesDashboard: React.FC<GamesDashboardProps> = ({ onGamePress }) => {
-  const { games, loading, refreshGames } = useApp();
+  const { games, loading, refreshGames, resetToSampleData } = useApp();
   const [selectedFilter, setSelectedFilter] = useState<GameStatus>('all');
 
   const filteredGames = games.filter(game => {
@@ -126,32 +127,51 @@ const GamesDashboard: React.FC<GamesDashboardProps> = ({ onGamePress }) => {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Games Dashboard</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Games Dashboard</Text>
+          <TouchableOpacity
+            style={styles.resetButton}
+            onPress={() => {
+              Alert.alert(
+                'Reset Data',
+                'This will reload all games from the latest data. Continue?',
+                [
+                  { text: 'Cancel', style: 'cancel' },
+                  { text: 'Reset', onPress: resetToSampleData },
+                ],
+              );
+            }}
+          >
+            <Text style={styles.resetButtonText}>Reset</Text>
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.filtersContainer}>
-        {renderFilterButton('all', 'All')}
-        {renderFilterButton('scheduled', 'Upcoming')}
-        {renderFilterButton('inProgress', 'Live')}
-        {renderFilterButton('final', 'Completed')}
+        <View style={styles.filtersContainer}>
+          {renderFilterButton('all', 'All')}
+          {renderFilterButton('scheduled', 'Upcoming')}
+          {renderFilterButton('inProgress', 'Live')}
+          {renderFilterButton('final', 'Completed')}
+        </View>
+
+        <FlatList
+          data={filteredGames}
+          keyExtractor={item => item.id}
+          renderItem={renderGameItem}
+          contentContainerStyle={styles.listContainer}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={refreshGames} />
+          }
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>No games found</Text>
+            </View>
+          }
+        />
       </View>
-
-      <FlatList
-        data={filteredGames}
-        keyExtractor={item => item.id}
-        renderItem={renderGameItem}
-        contentContainerStyle={styles.listContainer}
-        refreshControl={
-          <RefreshControl refreshing={loading} onRefresh={refreshGames} />
-        }
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No games found</Text>
-          </View>
-        }
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -160,12 +180,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F2F2F7',
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    marginVertical: 20,
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#000',
-    textAlign: 'center',
-    marginVertical: 20,
+  },
+  resetButton: {
+    backgroundColor: '#FF3B30',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+  },
+  resetButtonText: {
+    color: '#FFF',
+    fontSize: 14,
+    fontWeight: '600',
   },
   filtersContainer: {
     flexDirection: 'row',
