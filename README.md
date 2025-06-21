@@ -1,97 +1,185 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# AportsApp - Sports Prediction React Native App
 
-# Getting Started
+A React Native sports prediction app built with TypeScript, featuring a clean iOS-focused UI and a simple mock API backend.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+### 🎮 Core Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Games Dashboard**: View upcoming, live, and completed games with filtering
+- **Game Detail Screen**: Detailed game view with prediction interface
+- **User Profile**: Track prediction history, win/loss record, and virtual balance
+- **Real-time Updates**: Mock API with simulated live game score updates
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### 🛠 Technical Features
 
-```sh
-# Using npm
-npm start
+- **React Native** with TypeScript
+- **Navigation** using React Navigation (Bottom Tabs)
+- **State Management** with React Context
+- **Local Storage** using AsyncStorage
+- **Mock API Server** with Express.js
+- **iOS-focused Design** with clean, modern UI
 
-# OR using Yarn
-yarn start
+## Project Structure
+
+```
+aportsApp/
+├── src/
+│   ├── components/          # React components
+│   │   ├── GamesDashboard.tsx
+│   │   ├── GameDetail.tsx
+│   │   └── UserProfile.tsx
+│   ├── context/             # React Context for state management
+│   │   └── AppContext.tsx
+│   ├── data/               # Sample data
+│   │   └── sample-games-simplified.json
+│   ├── services/           # API service layer
+│   │   └── api.ts
+│   └── types/              # TypeScript type definitions
+│       └── index.ts
+├── server/                 # Mock API server
+│   ├── server.js
+│   └── package.json
+├── ios/                    # iOS native code
+├── android/                # Android native code
+└── App.tsx                 # Main app component
 ```
 
-## Step 2: Build and run your app
+## Getting Started
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Prerequisites
 
-### Android
+- Node.js (>= 18)
+- React Native CLI
+- Xcode (for iOS development)
+- iOS Simulator or physical device
 
-```sh
-# Using npm
-npm run android
+### Installation
 
-# OR using Yarn
-yarn android
-```
+1. **Clone the repository**
 
-### iOS
+   ```bash
+   git clone <repository-url>
+   cd aportsApp
+   ```
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+2. **Install dependencies**
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+   ```bash
+   npm install
+   ```
 
-```sh
-bundle install
-```
+3. **Install iOS dependencies**
 
-Then, and every time you update your native dependencies, run:
+   ```bash
+   cd ios && pod install && cd ..
+   ```
 
-```sh
-bundle exec pod install
-```
+4. **Install server dependencies**
+   ```bash
+   cd server && npm install && cd ..
+   ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### Running the App
 
-```sh
-# Using npm
-npm run ios
+1. **Start the Mock API Server** (in a separate terminal)
 
-# OR using Yarn
-yarn ios
-```
+   ```bash
+   cd server
+   npm start
+   ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+   The server will run on `http://localhost:3001`
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+2. **Start the React Native Metro bundler**
 
-## Step 3: Modify your app
+   ```bash
+   npm start
+   ```
 
-Now that you have successfully run the app, let's make changes!
+3. **Run the iOS app**
+   ```bash
+   npm run ios
+   ```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## API Endpoints
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+The mock API server provides the following endpoints:
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+- `GET /api/health` - Health check
+- `GET /api/games` - Get all games
+- `GET /api/games/:id` - Get specific game
+- `POST /api/predictions` - Submit a prediction
+- `GET /api/user/:id` - Get user profile
 
-## Congratulations! :tada:
+## Sample Data
 
-You've successfully run and modified your React Native App. :partying_face:
+The app uses sample NBA game data with:
 
-### Now what?
+- 3 games (scheduled, in-progress, completed)
+- User profile with prediction history
+- Virtual balance system
+- Win/loss statistics
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## Features in Detail
 
-# Troubleshooting
+### Games Dashboard
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- Filter games by status (All, Upcoming, Live, Completed)
+- Pull-to-refresh functionality
+- Clean card-based design
+- Real-time score updates for live games
 
-# Learn More
+### Game Detail Screen
 
-To learn more about React Native, take a look at the following resources:
+- Complete team information and records
+- Betting odds display
+- Prediction interface with team selection
+- Bet amount input with balance validation
+- Existing prediction display
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### User Profile
+
+- Current virtual balance
+- Win/loss/pending statistics
+- Win rate calculation
+- Total winnings and losses
+- Complete prediction history
+
+### Mock API Features
+
+- Automatic score updates every 30 seconds for in-progress games
+- Prediction submission with validation
+- Balance management
+- Error handling with fallback to local data
+
+## Development Notes
+
+- The app works offline by falling back to local AsyncStorage data when the API is unavailable
+- All data is persisted locally using AsyncStorage
+- The UI is optimized for iOS with native-feeling components
+- TypeScript is used throughout for type safety
+- The mock API simulates real-world scenarios with proper error handling
+
+## Future Enhancements
+
+- WebSocket integration for real-time updates
+- Push notifications for game results
+- More detailed betting options (over/under, etc.)
+- User authentication
+- Social features (leaderboards, sharing)
+- Real sports data integration
+
+## Testing
+
+Run the app in the iOS Simulator to test:
+
+1. Browse games in the dashboard
+2. Filter games by status
+3. Tap on a game to view details
+4. Make predictions on scheduled/live games
+5. Check your profile to see prediction history
+6. Pull to refresh games list
+
+The mock API will automatically update scores for in-progress games every 30 seconds.
+# SharpStakesAssignment
