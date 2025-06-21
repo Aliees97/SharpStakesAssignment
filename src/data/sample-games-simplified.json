@@ -23,18 +23,18 @@
       "id": "gm1002",
       "status": "inProgress",
       "period": "3rd",
-      "clock": "9:11",
+      "clock": "1:22",
       "homeTeam": {
         "name": "Golden State Warriors",
         "abbreviation": "GSW",
         "record": "38-32",
-        "score": 82
+        "score": 126
       },
       "awayTeam": {
         "name": "Dallas Mavericks",
         "abbreviation": "DAL",
         "record": "40-30",
-        "score": 89
+        "score": 147
       },
       "odds": {
         "spread": "-2.5",
@@ -100,18 +100,18 @@
       "id": "gm1006",
       "status": "inProgress",
       "period": "2nd",
-      "clock": "6:42",
+      "clock": "10:10",
       "homeTeam": {
         "name": "Sacramento Kings",
         "abbreviation": "SAC",
         "record": "39-31",
-        "score": 54
+        "score": 90
       },
       "awayTeam": {
         "name": "Portland Trail Blazers",
         "abbreviation": "POR",
         "record": "28-42",
-        "score": 48
+        "score": 97
       },
       "odds": {
         "spread": "+7.5",
@@ -177,18 +177,18 @@
       "id": "gm1010",
       "status": "inProgress",
       "period": "4th",
-      "clock": "2:15",
+      "clock": "6:58",
       "homeTeam": {
         "name": "Orlando Magic",
         "abbreviation": "ORL",
         "record": "37-33",
-        "score": 105
+        "score": 152
       },
       "awayTeam": {
         "name": "Cleveland Cavaliers",
         "abbreviation": "CLE",
         "record": "44-26",
-        "score": 108
+        "score": 160
       },
       "odds": {
         "spread": "-3.5",
@@ -235,7 +235,7 @@
   "user": {
     "id": "usr123",
     "username": "sportsfan42",
-    "balance": 968,
+    "balance": 768,
     "predictions": [
       {
         "gameId": "gm1003",
@@ -256,12 +256,26 @@
         "amount": 32,
         "result": "pending",
         "timestamp": "2025-06-21T06:23:44.372Z"
+      },
+      {
+        "gameId": "gm1011",
+        "pick": "LAC",
+        "amount": 100,
+        "result": "pending",
+        "timestamp": "2025-06-21T08:16:16.654Z"
+      },
+      {
+        "gameId": "gm1010",
+        "pick": "CLE",
+        "amount": 100,
+        "result": "pending",
+        "timestamp": "2025-06-21T08:58:58.426Z"
       }
     ],
     "stats": {
       "wins": 7,
       "losses": 4,
-      "pending": 2
+      "pending": 4
     }
   }
 }

@@ -6,11 +6,16 @@ import {
   ScrollView,
   SafeAreaView,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import { useApp } from '../context/AppContext';
-import { Prediction } from '../types';
+import { Prediction, Game } from '../types';
 
-const UserProfile: React.FC = () => {
+interface UserProfileProps {
+  onGamePress?: (game: Game) => void;
+}
+
+const UserProfile: React.FC<UserProfileProps> = ({ onGamePress }) => {
   const { user, games } = useApp();
 
   const getGameById = (gameId: string) => {
@@ -51,8 +56,19 @@ const UserProfile: React.FC = () => {
   const renderPredictionItem = ({ item }: { item: Prediction }) => {
     const game = getGameById(item.gameId);
 
+    const handlePredictionPress = () => {
+      if (game && onGamePress) {
+        onGamePress(game);
+      }
+    };
+
     return (
-      <View style={styles.predictionCard}>
+      <TouchableOpacity
+        style={styles.predictionCard}
+        onPress={handlePredictionPress}
+        activeOpacity={0.7}
+        disabled={!game || !onGamePress}
+      >
         <View style={styles.predictionHeader}>
           <Text style={styles.gameId}>Game #{item.gameId}</Text>
           <Text
@@ -75,7 +91,13 @@ const UserProfile: React.FC = () => {
             <Text style={styles.payoutText}>Payout: ${item.payout}</Text>
           )}
         </View>
-      </View>
+
+        {onGamePress && (
+          <View style={styles.tapHintContainer}>
+            <Text style={styles.tapHint}>Tap to view game details</Text>
+          </View>
+        )}
+      </TouchableOpacity>
     );
   };
 
@@ -358,6 +380,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#8E8E93',
     textAlign: 'center',
+  },
+  tapHintContainer: {
+    marginTop: 8,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  tapHint: {
+    fontSize: 12,
+    color: '#007AFF',
+    textAlign: 'center',
+    fontStyle: 'italic',
   },
 });
 
