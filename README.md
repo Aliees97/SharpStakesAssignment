@@ -182,4 +182,7 @@ Run the app in the iOS Simulator to test:
 6. Pull to refresh games list
 
 The mock API will automatically update scores for in-progress games every 30 seconds.
+
+Used ROO CODE Vscode AI plugin with anthropic key of claude-sonnet-4
+
 # SharpStakesAssignment
