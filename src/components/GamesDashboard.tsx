@@ -57,6 +57,44 @@ const GamesDashboard: React.FC<GamesDashboardProps> = ({ onGamePress }) => {
     }
   };
 
+  const getStatusLabel = (status: string) => {
+    switch (status) {
+      case 'scheduled':
+        return 'UPCOMING';
+      case 'inProgress':
+        return 'LIVE';
+      case 'final':
+        return 'FINAL';
+      default:
+        return status.toUpperCase();
+    }
+  };
+
+  const getStatusBadgeStyle = (status: string) => {
+    switch (status) {
+      case 'scheduled':
+        return {
+          backgroundColor: '#007AFF',
+          borderColor: '#007AFF',
+        };
+      case 'inProgress':
+        return {
+          backgroundColor: '#FF3B30',
+          borderColor: '#FF3B30',
+        };
+      case 'final':
+        return {
+          backgroundColor: '#34C759',
+          borderColor: '#34C759',
+        };
+      default:
+        return {
+          backgroundColor: '#8E8E93',
+          borderColor: '#8E8E93',
+        };
+    }
+  };
+
   const renderGameItem = ({ item }: { item: Game }) => (
     <TouchableOpacity
       style={styles.gameCard}
@@ -64,11 +102,18 @@ const GamesDashboard: React.FC<GamesDashboardProps> = ({ onGamePress }) => {
       activeOpacity={0.7}
     >
       <View style={styles.gameHeader}>
-        <Text
-          style={[styles.statusText, { color: getStatusColor(item.status) }]}
-        >
-          {getStatusText(item)}
-        </Text>
+        <View style={styles.statusContainer}>
+          <View style={[styles.statusBadge, getStatusBadgeStyle(item.status)]}>
+            <Text style={styles.statusBadgeText}>
+              {getStatusLabel(item.status)}
+            </Text>
+          </View>
+          <Text
+            style={[styles.statusText, { color: getStatusColor(item.status) }]}
+          >
+            {getStatusText(item)}
+          </Text>
+        </View>
         {item.odds && (
           <Text style={styles.oddsText}>
             {item.odds.favorite} {item.odds.spread}
@@ -252,9 +297,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 12,
   },
+  statusContainer: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: 6,
+  },
+  statusBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  statusBadgeText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#FFF',
+    letterSpacing: 0.5,
+  },
   statusText: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#8E8E93',
   },
   oddsText: {
     fontSize: 14,
